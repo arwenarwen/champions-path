@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Champion's Path · Elite European Fencing 2027</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@200;300;400;500&family=Noto+Serif+SC:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root{--black:#080808;--d1:#0D0D0D;--d2:#141414;--d3:#1B1B1B;--d4:#242424;--cream:#F0E9DC;--c60:rgba(240,233,220,.60);--c40:rgba(240,233,220,.40);--c20:rgba(240,233,220,.20);--gold:#C9A55A;--gold2:#DFC07A;--gd15:rgba(201,165,90,.15);--gd30:rgba(201,165,90,.30);--serif:'Playfair Display','Cormorant Garamond',Georgia,serif;--body:'Jost',sans-serif;--zh:'Noto Serif SC',serif}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--black);color:var(--cream);font-family:var(--body);font-weight:300;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+img{display:block;width:100%;object-fit:cover}
+a{color:inherit;text-decoration:none}
+button{cursor:pointer;font-family:inherit;border:none;background:none}
+.zh{display:none}body.zh span.zh{display:inline}body.zh p.zh{display:block}body.zh div.zh{display:block}body.zh h1.zh{display:block}body.zh h2.zh{display:block}body.zh .en{display:none}
+.zh-bl{display:none}body.zh .zh-bl{display:block}body.zh .en-bl{display:none}
+/* LANG */
+.lang-wrap{position:fixed;top:22px;right:26px;z-index:9000;display:flex;border:1px solid var(--gd30)}
+.lang-wrap button{background:transparent;color:var(--gold);padding:6px 16px;font-family:'Playfair Display',serif;font-size:11px;letter-spacing:1.5px;transition:.2s}
+.lang-wrap button.on{background:var(--gold);color:var(--black)}
+.lang-wrap button:hover:not(.on){background:var(--gd15)}
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:8000;height:70px;display:flex;align-items:center;justify-content:space-between;padding:0 48px;transition:background .4s}
+nav.scrolled{background:rgba(8,8,8,.96);border-bottom:1px solid var(--gd15)}
+.nav-logo{font-family:var(--serif);font-size:16px;font-weight:500;letter-spacing:2px;color:var(--cream)}
+.nav-logo em{color:var(--gold);font-style:italic}
+.nav-links{display:flex;gap:32px;list-style:none;margin-right:110px}
+.nav-links a{font-family:'Jost',sans-serif;font-size:11px;font-weight:400;letter-spacing:2.5px;text-transform:uppercase;color:var(--c60);transition:color .3s;cursor:pointer}
+.nav-links a:hover{color:var(--gold)}
+/* HERO */
+#hero{position:relative;height:100vh;min-height:700px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 20% 50%,rgba(201,165,90,.07) 0%,transparent 100%),radial-gradient(ellipse 50% 60% at 80% 30%,rgba(201,165,90,.05) 0%,transparent 100%),linear-gradient(170deg,#0D0D0D 0%,#080808 60%,#0D0B06 100%)}
+.hero-bg::before{content:'';position:absolute;inset:0;background-image:repeating-linear-gradient(18deg,transparent,transparent 140px,rgba(201,165,90,.015) 140px,rgba(201,165,90,.015) 141px)}
+.hero-bg::after{content:'';position:absolute;left:40%;top:-40%;width:1px;height:180%;background:linear-gradient(to bottom,transparent,rgba(201,165,90,.10) 35%,rgba(201,165,90,.10) 65%,transparent);transform:rotate(12deg)}
+.hero-inner{position:relative;z-index:2;text-align:center;padding:0 24px}
+.hero-eyebrow{font-family:'Jost',sans-serif;font-size:11px;font-weight:400;letter-spacing:5px;text-transform:uppercase;color:var(--gold);margin-bottom:28px;opacity:0;animation:fadeUp .9s ease .4s forwards}
+.hero-h1{font-family:var(--serif);font-size:clamp(60px,10vw,120px);font-weight:400;line-height:1;color:var(--cream);margin-bottom:20px;opacity:0;animation:fadeUp .9s ease .6s forwards}
+.hero-h1 em{font-style:italic;color:var(--gold2)}
+.hero-h1-zh{font-family:var(--zh);font-size:clamp(13px,1.8vw,18px);color:rgba(201,165,90,.55);letter-spacing:6px;font-weight:300;margin-bottom:32px;opacity:0;animation:fadeUp .9s ease .75s forwards}
+.hero-sub{max-width:520px;margin:0 auto 52px;font-size:17px;font-weight:300;line-height:1.85;color:var(--c60);opacity:0;animation:fadeUp .9s ease .9s forwards}
+.hero-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;opacity:0;animation:fadeUp .9s ease 1.05s forwards}
+.btn-gold{background:var(--gold);color:var(--black);padding:14px 40px;font-family:'Jost',sans-serif;font-size:11px;font-weight:500;letter-spacing:3px;text-transform:uppercase;transition:all .3s;display:inline-block;border:1px solid var(--gold)}
+.btn-gold:hover{background:var(--gold2);border-color:var(--gold2);transform:translateY(-2px)}
+.btn-outline{background:transparent;color:var(--gold);padding:14px 40px;font-family:'Jost',sans-serif;font-size:11px;font-weight:400;letter-spacing:3px;text-transform:uppercase;border:1px solid var(--gd30);transition:all .3s;display:inline-block;cursor:pointer}
+.btn-outline:hover{border-color:var(--gold);background:var(--gd15);transform:translateY(-2px)}
+.hero-ticker{position:absolute;bottom:0;left:0;right:0;border-top:1px solid var(--gd15);background:rgba(8,8,8,.7);backdrop-filter:blur(8px);padding:18px 0;overflow:hidden;opacity:0;animation:fadeIn .9s ease 1.4s forwards}
+.ticker-track{display:flex;width:max-content;animation:ticker 30s linear infinite}
+.ticker-item{display:flex;align-items:center;gap:8px;padding:0 40px;white-space:nowrap;font-family:'Jost',sans-serif;font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:var(--c60)}
+.ticker-dot{color:var(--gold);font-size:8px}
+@keyframes ticker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+/* SECTIONS */
+.section{padding:120px 48px}
+.section-inner{max-width:1100px;margin:0 auto}
+.s-label{display:block;font-family:'Jost',sans-serif;font-size:10px;font-weight:500;letter-spacing:5px;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
+.s-title{font-family:var(--serif);font-size:clamp(38px,5vw,62px);font-weight:400;line-height:1.1;color:var(--cream);margin-bottom:8px}
+.s-title em{font-style:italic;color:var(--gold2)}
+.s-zh{font-family:var(--zh);font-size:clamp(12px,1.5vw,16px);color:rgba(201,165,90,.5);letter-spacing:5px;font-weight:300;margin-bottom:52px}
+.rule{width:48px;height:1px;background:var(--gold);margin:20px 0 44px}
+/* ABOUT */
+#about{background:var(--d1)}
+.about-grid{display:grid;grid-template-columns:420px 1fr;gap:80px;align-items:start}
+.about-portrait{position:relative;aspect-ratio:3/4;background:var(--d3);border:1px solid var(--gd15);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px}
+.portrait-corner{position:absolute;width:20px;height:20px;border-color:var(--gold);border-style:solid;opacity:.5}
+.portrait-corner.tl{top:12px;left:12px;border-width:1px 0 0 1px}
+.portrait-corner.tr{top:12px;right:12px;border-width:1px 1px 0 0}
+.portrait-corner.bl{bottom:12px;left:12px;border-width:0 0 1px 1px}
+.portrait-corner.br{bottom:12px;right:12px;border-width:0 1px 1px 0}
+.about-name{font-family:var(--serif);font-size:clamp(32px,4vw,50px);font-weight:400;margin-bottom:6px}
+.about-name em{font-style:italic;color:var(--gold2)}
+.about-role{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:32px}
+.about-text{font-size:16px;line-height:1.95;color:var(--c60);margin-bottom:16px;font-weight:300}
+.timeline{margin-top:40px;border-left:1px solid var(--gd30);padding-left:28px}
+.tl-item{position:relative;margin-bottom:24px}
+.tl-item::before{content:'';position:absolute;left:-33px;top:6px;width:8px;height:8px;border:1px solid var(--gold);background:var(--black);transform:rotate(45deg)}
+.tl-year{font-family:'Jost',sans-serif;font-size:10px;letter-spacing:2px;color:var(--gold);margin-bottom:3px}
+.tl-text{font-size:14px;color:var(--c60);line-height:1.6}
+/* PROGRAMS */
+#programs{background:var(--black)}
+.prog-grid{display:grid;grid-template-columns:1fr 1fr;gap:3px;margin-top:60px}
+.prog-card{position:relative;overflow:hidden;cursor:pointer;aspect-ratio:4/3}
+.prog-card img{width:100%;height:100%;object-fit:cover;transition:transform .7s cubic-bezier(.25,.46,.45,.94)}
+.prog-card:hover img{transform:scale(1.08)}
+.prog-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(8,8,8,.95) 0%,rgba(8,8,8,.40) 55%,rgba(8,8,8,.15) 100%);transition:background .4s}
+.prog-card:hover .prog-overlay{background:linear-gradient(to top,rgba(8,8,8,.98) 0%,rgba(8,8,8,.65) 55%,rgba(8,8,8,.30) 100%)}
+.prog-body{position:absolute;bottom:0;left:0;right:0;padding:32px 30px}
+.prog-flag{font-size:26px;margin-bottom:10px}
+.prog-nation{font-family:'Jost',sans-serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
+.prog-title{font-family:var(--serif);font-size:clamp(22px,3vw,32px);font-weight:400;margin-bottom:4px;line-height:1.2}
+.prog-title em{font-style:italic;color:var(--gold2)}
+.prog-sub{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:2px;color:var(--c40);margin-bottom:16px}
+.prog-pills{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:20px}
+.pill{font-family:'Jost',sans-serif;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);border:1px solid var(--gd30);padding:4px 10px}
+.prog-cta{display:inline-flex;align-items:center;gap:8px;font-family:'Jost',sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);border-bottom:1px solid var(--gd30);padding-bottom:2px;transition:all .3s}
+.prog-card:hover .prog-cta{color:var(--gold2);border-color:var(--gold2)}
+.prog-arrow{transition:transform .3s}
+.prog-card:hover .prog-arrow{transform:translateX(4px)}
+.prog-card::after{content:'';position:absolute;inset:0;box-shadow:inset 0 0 0 1px transparent;transition:box-shadow .4s}
+.prog-card:hover::after{box-shadow:inset 0 0 0 1px rgba(201,165,90,.35)}
+/* INVESTMENT */
+#investment{background:var(--d2)}
+.invest-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.invest-text .about-text{font-size:17px}
+.invest-list{list-style:none;margin:32px 0 40px}
+.invest-list li{display:flex;align-items:flex-start;gap:16px;padding:14px 0;border-bottom:1px solid rgba(201,165,90,.1);font-size:14px;color:var(--c60);line-height:1.6}
+.invest-list .li-mark{color:var(--gold);font-size:14px;flex-shrink:0;margin-top:1px}
+.invest-card{background:var(--d3);border:1px solid var(--gd15);padding:52px 44px;position:relative}
+.invest-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.invest-card-eyebrow{font-family:'Jost',sans-serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
+.invest-card-title{font-family:var(--serif);font-size:36px;font-weight:400;margin-bottom:8px}
+.invest-card-title em{font-style:italic;color:var(--gold2)}
+.invest-card-desc{font-size:15px;color:var(--c60);line-height:1.8;margin-bottom:36px}
+.invest-note{margin-top:20px;font-size:12px;color:var(--c40);letter-spacing:1px;font-family:'Jost',sans-serif}
+/* REGISTER */
+#register{background:var(--d1)}
+.reg-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
+.reg-info-pts{list-style:none;margin-top:28px}
+.reg-info-pts li{padding:12px 0;border-bottom:1px solid rgba(201,165,90,.1);font-size:13px;color:var(--c60);display:flex;gap:14px}
+.reg-info-pts .li-mark{color:var(--gold)}
+.reg-form{background:var(--d2);border:1px solid var(--gd15);padding:48px 44px}
+.form-title{font-family:var(--serif);font-size:28px;font-weight:400;margin-bottom:6px}
+.form-sub{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:2px;color:var(--c40);margin-bottom:32px}
+.form-group{margin-bottom:20px}
+.form-group label{display:block;font-family:'Jost',sans-serif;font-size:9px;font-weight:500;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+.form-group input,.form-group select,.form-group textarea{width:100%;background:rgba(255,255,255,.03);border:1px solid rgba(201,165,90,.2);color:var(--cream);padding:12px 16px;font-family:'Jost',sans-serif;font-size:14px;font-weight:300;outline:none;transition:border-color .3s;appearance:none}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--gold)}
+.form-group select option{background:var(--d2)}
+.form-group textarea{height:90px;resize:vertical}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.form-submit{width:100%;background:var(--gold);color:var(--black);border:none;padding:16px;font-family:'Jost',sans-serif;font-size:11px;font-weight:500;letter-spacing:3px;text-transform:uppercase;cursor:pointer;transition:all .3s;margin-top:8px}
+.form-submit:hover{background:var(--gold2);transform:translateY(-1px)}
+.form-foot{margin-top:16px;font-size:11px;color:var(--c40);text-align:center;font-family:'Jost',sans-serif;letter-spacing:.5px;line-height:1.7}
+/* FOOTER */
+footer{background:var(--black);border-top:1px solid var(--gd15);padding:64px 48px 36px}
+.footer-inner{max-width:1100px;margin:0 auto}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr;gap:60px;margin-bottom:52px}
+.footer-logo{font-family:var(--serif);font-size:20px;font-weight:500;letter-spacing:1px;margin-bottom:12px}
+.footer-logo em{color:var(--gold);font-style:italic}
+.footer-desc{font-size:13px;color:var(--c40);line-height:1.8;max-width:300px}
+.footer-col h5{font-family:'Jost',sans-serif;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:18px}
+.footer-col ul{list-style:none}
+.footer-col li{margin-bottom:10px}
+.footer-col a{font-size:13px;color:var(--c40);transition:color .3s;cursor:pointer}
+.footer-col a:hover{color:var(--gold)}
+.footer-bottom{border-top:1px solid rgba(201,165,90,.08);padding-top:24px;display:flex;justify-content:space-between;align-items:center;font-family:'Jost',sans-serif;font-size:11px;color:var(--c20);letter-spacing:1px}
+/* MODAL */
+.modal-wrap{position:fixed;inset:0;z-index:10000;background:rgba(8,8,8,0);pointer-events:none;transition:background .4s}
+.modal-wrap.open{background:rgba(8,8,8,.97);pointer-events:all}
+.modal-scroll{position:absolute;inset:0;overflow-y:auto;opacity:0;transform:translateY(20px);transition:opacity .4s .05s,transform .4s .05s;pointer-events:none}
+.modal-wrap.open .modal-scroll{opacity:1;transform:none;pointer-events:all}
+.modal-inner{max-width:960px;margin:0 auto;padding:100px 48px 80px}
+.modal-close-btn{position:fixed;top:20px;left:40px;z-index:10100;display:flex;align-items:center;gap:10px;font-family:'Jost',sans-serif;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);border:1px solid var(--gd30);padding:9px 20px;transition:opacity .3s ease,transform .3s ease;background:rgba(8,8,8,.85);backdrop-filter:blur(6px);opacity:0;pointer-events:none;transform:translateY(-8px)}
+.modal-close-btn:hover{background:var(--gd15);border-color:var(--gold)}
+body.modal-open .modal-close-btn{opacity:1;pointer-events:all;transform:translateY(0)}
+.m-hero{position:relative;width:100%;height:380px;margin-bottom:64px;overflow:hidden}
+.m-hero img{width:100%;height:100%;object-fit:cover;filter:brightness(.65)}
+.m-hero-over{position:absolute;bottom:0;left:0;right:0;padding:40px 44px;background:linear-gradient(to top,rgba(8,8,8,.98),transparent)}
+.m-flag{font-size:36px;margin-bottom:10px}
+.m-nation{font-family:'Jost',sans-serif;font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+.m-title{font-family:var(--serif);font-size:clamp(38px,6vw,68px);font-weight:400;line-height:1;color:var(--cream)}
+.m-title em{font-style:italic;color:var(--gold2)}
+.m-intro{display:grid;grid-template-columns:1fr 340px;gap:52px;margin-bottom:64px;align-items:start}
+.m-intro-text{font-size:17px;line-height:1.95;color:var(--c60);font-weight:300}
+.m-details{border:1px solid var(--gd15);padding:32px 28px;position:relative}
+.m-details::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.m-det-item{margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid rgba(201,165,90,.1)}
+.m-det-item:last-child{margin-bottom:0;padding-bottom:0;border-bottom:none}
+.m-det-icon{font-size:16px;margin-bottom:4px}
+.m-det-label{font-family:'Jost',sans-serif;font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);margin-bottom:4px}
+.m-det-val{font-size:14px;color:var(--c60);line-height:1.6}
+.m-sec-label{font-family:'Jost',sans-serif;font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:24px;padding-bottom:14px;border-bottom:1px solid var(--gd15);display:block}
+.m-cities{display:grid;grid-template-columns:repeat(4,1fr);gap:3px;margin-bottom:60px}
+.m-city{position:relative;overflow:hidden}
+.m-city img{aspect-ratio:3/4;object-fit:cover;transition:transform .5s}
+.m-city:hover img{transform:scale(1.05)}
+.m-city-over{position:absolute;inset:0;background:linear-gradient(to top,rgba(8,8,8,.92) 0%,transparent 55%)}
+.m-city-info{position:absolute;bottom:0;padding:16px 14px}
+.m-city-name{font-family:'Jost',sans-serif;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);margin-bottom:3px}
+.m-city-zh{font-family:var(--zh);font-size:14px;color:var(--cream)}
+.m-itin-week{margin-bottom:8px}
+.m-week-label{font-family:'Jost',sans-serif;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:rgba(201,165,90,.55);display:block;margin-bottom:16px}
+.m-itin-row{display:grid;grid-template-columns:72px 1fr;border-bottom:1px solid rgba(201,165,90,.08);padding:16px 0;transition:background .2s}
+.m-itin-row:hover{background:rgba(201,165,90,.03)}
+.m-day{font-family:'Jost',sans-serif;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);padding-top:3px}
+.m-itin-head{font-family:var(--serif);font-size:18px;font-weight:400;margin-bottom:4px}
+.m-itin-body{font-size:13px;color:var(--c60);line-height:1.75;font-weight:300}
+.m-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:52px}
+.m-tag{font-family:'Jost',sans-serif;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);border:1px solid var(--gd30);padding:5px 12px}
+.m-cta{margin-top:52px;text-align:center;padding-top:40px;border-top:1px solid var(--gd15)}
+.m-cta p{font-size:14px;color:var(--c60);margin-bottom:24px}
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .8s ease,transform .8s ease}
+.reveal.vis{opacity:1;transform:none}
+.reveal-d1{transition-delay:.1s}.reveal-d2{transition-delay:.2s}.reveal-d3{transition-delay:.3s}
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@media(max-width:960px){
+  .nav-links{display:none}nav{padding:0 20px}
+  .section{padding:80px 24px}
+  .about-grid,.invest-grid,.reg-grid,.m-intro,.footer-top{grid-template-columns:1fr;gap:36px}
+  .prog-grid{grid-template-columns:1fr}
+  .m-cities{grid-template-columns:1fr 1fr}
+  .form-row{grid-template-columns:1fr}
+  .modal-inner{padding:80px 24px 60px}
+  .modal-close-btn{left:16px;top:14px}
+  .m-hero{height:280px}
+}
+</style>
+</head>
+<body>
+
+<div class="lang-wrap">
+  <button class="on" onclick="setLang('en')">EN</button>
+  <button onclick="setLang('zh')">中文</button>
+</div>
+
+<nav id="nav">
+  <div class="nav-logo">Champion's <em>Path</em></div>
+  <ul class="nav-links">
+    <li><a onclick="scrollTo2('#about')"><span class="en">About</span><span class="zh">关于</span></a></li>
+    <li><a onclick="scrollTo2('#programs')"><span class="en">Programs</span><span class="zh">项目</span></a></li>
+    <li><a onclick="scrollTo2('#investment')"><span class="en">Investment</span><span class="zh">申请</span></a></li>
+    <li><a onclick="scrollTo2('#register')"><span class="en">Apply</span><span class="zh">报名</span></a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-inner">
+    <p class="hero-eyebrow">
+      <span class="en">Summer 2027 &nbsp;·&nbsp; Elite European Fencing Experiences</span>
+      <span class="zh">2027年夏 &nbsp;·&nbsp; 欧洲精英击剑体验</span>
+    </p>
+    <h1 class="hero-h1">
+      <span class="en">Champion's<br><em>Path</em></span>
+      <span class="zh" style="font-family:var(--zh);letter-spacing:4px">冠军<br><em>之路</em></span>
+    </h1>
+    <p class="hero-h1-zh">通往欧洲的冠军之路</p>
+    <p class="hero-sub">
+      <span class="en">A curated two-week athletic and cultural immersion<br>for ambitious young fencers.</span>
+      <span class="zh" style="font-family:var(--zh)">为有志向的年轻击剑运动员量身定制的<br>两周运动与文化沉浸体验。</span>
+    </p>
+    <div class="hero-btns">
+      <a href="#programs" class="btn-gold"><span class="en">Explore Programs</span><span class="zh">浏览项目</span></a>
+      <a href="#register" class="btn-outline"><span class="en">Request Invitation</span><span class="zh">申请邀请函</span></a>
+    </div>
+  </div>
+  <div class="hero-ticker"><div class="ticker-track" id="ticker"></div></div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="section">
+  <div class="section-inner">
+    <div class="about-grid reveal">
+      <div>
+        <div class="about-portrait">
+          <span style="font-size:48px;opacity:.15">🤺</span>
+          <span style="font-family:'Jost',sans-serif;font-size:9px;letter-spacing:3px;color:var(--gold);opacity:.6;text-transform:uppercase;text-align:center;padding:0 24px">Portrait Placeholder</span>
+          <div class="portrait-corner tl"></div><div class="portrait-corner tr"></div>
+          <div class="portrait-corner bl"></div><div class="portrait-corner br"></div>
+        </div>
+      </div>
+      <div>
+        <span class="s-label"><span class="en">Who We Are</span><span class="zh">关于我们</span></span>
+        <h2 class="about-name">Arwen<br><em>Borowiak</em></h2>
+        <p class="about-role"><span class="en">Founder &amp; Head Coach · Based in Germany</span><span class="zh">创始人及主教练 · 常驻德国</span></p>
+        <div class="rule"></div>
+        <p class="about-text en-bl">Born and raised in Germany, I came to fencing as a child and never stopped. I trained across Europe — Germany, France, Poland, Czech Republic — and later traveled to China and Japan to train at elite academies before competing at the highest international levels across Asia and Europe.</p>
+        <p class="about-text zh-bl" style="font-family:var(--zh);font-size:15px;line-height:2">我在德国出生长大，自幼与击剑结缘，从未停止。我先后在德国、法国、波兰、捷克接受训练，后赴中国和日本在精英学院深造，并在亚欧两大洲参加最高级别的国际赛事。</p>
+        <p class="about-text en-bl">I earned a US university scholarship, was named a 4× NCAA All-American, and won the US National Championship in 2018. In 2019, I became European Champion and ranked World #2 as a cadet. Champion's Path was born to share these transformative experiences with the next generation.</p>
+        <p class="about-text zh-bl" style="font-family:var(--zh);font-size:15px;line-height:2">我获得美国大学奖学金，四度荣获NCAA全美最佳，并于2018年夺得美国全国冠军。2019年，我荣获欧洲冠军，青年组世界排名第二。冠军之路由此而生，旨在将这些宝贵经历传递给下一代。</p>
+        <p class="about-text en-bl">My mission: bridge elite sport with global education. Every program is built on discipline, cultural awareness, and a belief that the best athletes are also the most curious citizens of the world.</p>
+        <p class="about-text zh-bl" style="font-family:var(--zh);font-size:15px;line-height:2">我的使命：架起精英体育与全球教育之间的桥梁。每个项目都建立在纪律和文化意识的基础上，相信最优秀的运动员也是世界上最具好奇心的公民。</p>
+        <div class="timeline">
+          <div class="tl-item"><div class="tl-year">2019</div><div class="tl-text"><span class="en">European Champion · World #2 Cadet Ranking</span><span class="zh" style="font-family:var(--zh)">欧洲冠军 · 青年组世界排名第二</span></div></div>
+          <div class="tl-item"><div class="tl-year">2018</div><div class="tl-text"><span class="en">US National Champion · 4× NCAA All-American</span><span class="zh" style="font-family:var(--zh)">美国全国冠军 · 四届NCAA全美最佳</span></div></div>
+          <div class="tl-item"><div class="tl-year">2016–18</div><div class="tl-text"><span class="en">German National Champion · International circuit</span><span class="zh" style="font-family:var(--zh)">德国全国冠军 · 国际赛事巡回</span></div></div>
+          <div class="tl-item"><div class="tl-year">2014–16</div><div class="tl-text"><span class="en">Elite training in China &amp; Japan · Asian circuit</span><span class="zh" style="font-family:var(--zh)">中国和日本精英训练 · 亚洲赛事巡回</span></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROGRAMS -->
+<section id="programs" class="section" style="background:var(--black)">
+  <div class="section-inner">
+    <span class="s-label reveal"><span class="en">Summer 2027 Programs</span><span class="zh">2027年夏季项目</span></span>
+    <h2 class="s-title reveal"><span class="en">Choose Your<br><em>European Journey</em></span><span class="zh" style="font-family:var(--zh)">选择你的<em>欧洲之旅</em></span></h2>
+    <p class="s-zh reveal"><span class="en">选择你的欧洲之旅</span><span class="zh">Choose Your European Journey</span></p>
+    <p class="reveal" style="max-width:580px;font-size:16px;line-height:1.9;color:var(--c60);margin-bottom:0">
+      <span class="en">Four hand-crafted two-week programs across Europe's most iconic cities. Elite fencing, world-class universities, and unforgettable culture — for athletes aged 12 to 22. Maximum 15 participants per program.</span>
+      <span class="zh" style="font-family:var(--zh);font-size:14px;line-height:2">四个精心策划的两周欧洲深度项目，纵贯欧洲最具代表性的城市。顶级击剑训练、名校参访与难忘文化体验——面向12至22岁运动员，每项目限额15人。</span>
+    </p>
+    <div class="prog-grid reveal">
+      <div class="prog-card" onclick="openModal('de')">
+        <img src="https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=900&q=80" alt="Berlin Brandenburg Gate">
+        <div class="prog-overlay"></div>
+        <div class="prog-body">
+          <div class="prog-flag">🇩🇪</div>
+          <div class="prog-nation"><span class="en">Germany · Europe</span><span class="zh">德国 · 欧洲</span></div>
+          <div class="prog-title"><span class="en">The German <em>Classic</em></span><span class="zh" style="font-family:var(--zh)">德国经典之旅</span></div>
+          <div class="prog-sub"><span class="en">2 Weeks · Berlin · Munich · Frankfurt · Cologne</span><span class="zh">两周 · 柏林 · 慕尼黑 · 法兰克福 · 科隆</span></div>
+          <div class="prog-pills"><span class="pill"><span class="en">Elite Club Training</span><span class="zh">精英训练</span></span><span class="pill"><span class="en">University Visits</span><span class="zh">大学参观</span></span><span class="pill"><span class="en">Cultural Experiences</span><span class="zh">文化体验</span></span><span class="pill"><span class="en">Small Group</span><span class="zh">小班制</span></span></div>
+          <div class="prog-cta"><span class="en">View Full Program</span><span class="zh">查看完整项目</span><span class="prog-arrow">→</span></div>
+        </div>
+      </div>
+      <div class="prog-card" onclick="openModal('fr')">
+        <img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=900&q=80" alt="Paris Eiffel Tower">
+        <div class="prog-overlay"></div>
+        <div class="prog-body">
+          <div class="prog-flag">🇫🇷</div>
+          <div class="prog-nation"><span class="en">France · Europe</span><span class="zh">法国 · 欧洲</span></div>
+          <div class="prog-title"><span class="en">The French <em>Élite</em></span><span class="zh" style="font-family:var(--zh)">法国精英之旅</span></div>
+          <div class="prog-sub"><span class="en">2 Weeks · Paris · Lyon · Bordeaux · Nice</span><span class="zh">两周 · 巴黎 · 里昂 · 波尔多 · 尼斯</span></div>
+          <div class="prog-pills"><span class="pill"><span class="en">Elite Club Training</span><span class="zh">精英训练</span></span><span class="pill"><span class="en">University Visits</span><span class="zh">大学参观</span></span><span class="pill"><span class="en">Cultural Experiences</span><span class="zh">文化体验</span></span><span class="pill"><span class="en">Small Group</span><span class="zh">小班制</span></span></div>
+          <div class="prog-cta"><span class="en">View Full Program</span><span class="zh">查看完整项目</span><span class="prog-arrow">→</span></div>
+        </div>
+      </div>
+      <div class="prog-card" onclick="openModal('it')">
+        <img src="https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=900&q=80" alt="Rome Colosseum">
+        <div class="prog-overlay"></div>
+        <div class="prog-body">
+          <div class="prog-flag">🇮🇹</div>
+          <div class="prog-nation"><span class="en">Italy · Europe</span><span class="zh">意大利 · 欧洲</span></div>
+          <div class="prog-title"><span class="en">The Italian <em>Masters</em></span><span class="zh" style="font-family:var(--zh)">意大利大师之旅</span></div>
+          <div class="prog-sub"><span class="en">2 Weeks · Rome · Milan · Florence · Venice</span><span class="zh">两周 · 罗马 · 米兰 · 佛罗伦萨 · 威尼斯</span></div>
+          <div class="prog-pills"><span class="pill"><span class="en">Elite Club Training</span><span class="zh">精英训练</span></span><span class="pill"><span class="en">University Visits</span><span class="zh">大学参观</span></span><span class="pill"><span class="en">Cultural Experiences</span><span class="zh">文化体验</span></span><span class="pill"><span class="en">Small Group</span><span class="zh">小班制</span></span></div>
+          <div class="prog-cta"><span class="en">View Full Program</span><span class="zh">查看完整项目</span><span class="prog-arrow">→</span></div>
+        </div>
+      </div>
+      <div class="prog-card" onclick="openModal('es')">
+        <img src="https://images.unsplash.com/photo-1539037116277-4db20889f2d4?w=900&q=80" alt="Barcelona Sagrada Familia">
+        <div class="prog-overlay"></div>
+        <div class="prog-body">
+          <div class="prog-flag">🇪🇸</div>
+          <div class="prog-nation"><span class="en">Spain · Europe</span><span class="zh">西班牙 · 欧洲</span></div>
+          <div class="prog-title"><span class="en">The Spanish <em>Passion</em></span><span class="zh" style="font-family:var(--zh)">西班牙激情之旅</span></div>
+          <div class="prog-sub"><span class="en">2 Weeks · Madrid · Barcelona · Valencia · Seville</span><span class="zh">两周 · 马德里 · 巴塞罗那 · 瓦伦西亚 · 塞维利亚</span></div>
+          <div class="prog-pills"><span class="pill"><span class="en">Elite Club Training</span><span class="zh">精英训练</span></span><span class="pill"><span class="en">University Visits</span><span class="zh">大学参观</span></span><span class="pill"><span class="en">Cultural Experiences</span><span class="zh">文化体验</span></span><span class="pill"><span class="en">Small Group</span><span class="zh">小班制</span></span></div>
+          <div class="prog-cta"><span class="en">View Full Program</span><span class="zh">查看完整项目</span><span class="prog-arrow">→</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INVESTMENT -->
+<section id="investment" class="section" style="background:var(--d2)">
+  <div class="section-inner">
+    <div class="invest-grid">
+      <div class="reveal">
+        <span class="s-label"><span class="en">Investment &amp; Selection</span><span class="zh">项目申请</span></span>
+        <h2 class="s-title"><span class="en">A Place Reserved<br>for the <em>Exceptional</em></span><span class="zh" style="font-family:var(--zh)">为卓越者<em>保留的席位</em></span></h2>
+        <p class="s-zh"><span class="en">项目申请</span><span class="zh">Investment &amp; Selection</span></p>
+        <p class="about-text en-bl" style="font-size:17px">Participation is deliberately limited to ensure each athlete receives personalized coaching attention and an elevated group experience. This is not a mass-market camp — it is a curated cohort of driven, culturally curious young fencers from around the world.</p>
+        <p class="about-text zh-bl" style="font-family:var(--zh);font-size:15px;line-height:2">参与名额经过严格把控，确保每位运动员获得个性化的专业指导和高品质团队体验。这不是大众化的训练营——而是汇聚来自世界各地、充满斗志与文化好奇心的优秀年轻击剑手的精英团队。</p>
+        <ul class="invest-list">
+          <li><span class="li-mark">◆</span><span class="en">Maximum 15 athletes per program — intentionally intimate</span><span class="zh" style="font-family:var(--zh)">每个项目最多15名运动员——刻意保持亲密规模</span></li>
+          <li><span class="li-mark">◆</span><span class="en">Investment details shared upon inquiry and review</span><span class="zh" style="font-family:var(--zh)">费用详情在咨询和审核后告知</span></li>
+          <li><span class="li-mark">◆</span><span class="en">Application required — places are not sold, they are earned</span><span class="zh" style="font-family:var(--zh)">需要申请——名额不是购买的，而是赢得的</span></li>
+          <li><span class="li-mark">◆</span><span class="en">All applicants reviewed within 48 hours of submission</span><span class="zh" style="font-family:var(--zh)">所有申请者将在提交后48小时内得到审核</span></li>
+          <li><span class="li-mark">◆</span><span class="en">4-star accommodation, meals, all transport &amp; activities included</span><span class="zh" style="font-family:var(--zh)">包含四星级住宿、餐饮、全部交通和活动</span></li>
+        </ul>
+      </div>
+      <div class="reveal reveal-d2">
+        <div class="invest-card">
+          <div class="invest-card-eyebrow"><span class="en">Summer 2027</span><span class="zh">2027年夏</span></div>
+          <div class="invest-card-title"><span class="en">Ready to<br><em>Apply?</em></span><span class="zh" style="font-family:var(--zh)">准备好<em>申请了吗？</em></span></div>
+          <p class="invest-card-desc"><span class="en">Spaces are extremely limited. We review applications on a rolling basis and recommend applying early. Tell us about your athlete and which program speaks to you.</span><span class="zh" style="font-family:var(--zh);font-size:14px;line-height:2">名额极为有限。我们滚动审核申请，建议尽早申请。请告诉我们您孩子的情况以及您感兴趣的项目。</span></p>
+          <a href="#register" class="btn-gold" style="display:block;text-align:center"><span class="en">Request Invitation</span><span class="zh">申请邀请</span></a>
+          <p class="invest-note"><span class="en">All inquiries treated with full discretion. We respond within 48 hours.</span><span class="zh" style="font-family:var(--zh)">所有咨询严格保密。48小时内回复。</span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REGISTER -->
+<section id="register" class="section" style="background:var(--d1)">
+  <div class="section-inner">
+    <div class="reg-grid">
+      <div class="reveal">
+        <span class="s-label"><span class="en">Apply for 2027</span><span class="zh">申请2027年项目名额</span></span>
+        <h2 class="s-title"><span class="en">Begin Your<br><em>Application</em></span><span class="zh" style="font-family:var(--zh)">开始您的<em>申请</em></span></h2>
+        <p class="s-zh"><span class="en">报名申请</span><span class="zh">Begin Application</span></p>
+        <div class="rule"></div>
+        <p class="about-text en-bl">Every Champion's Path athlete is hand-selected. We review each application personally and respond within 48 hours. No commitment required — simply tell us about your athlete.</p>
+        <p class="about-text zh-bl" style="font-family:var(--zh);font-size:15px;line-height:2">每位冠军之路运动员都经过精心甄选。我们亲自审核每份申请，48小时内回复。申请无需承诺——只需告诉我们您孩子的情况。</p>
+        <ul class="reg-info-pts">
+          <li><span class="li-mark">✦</span><span class="en">Ages 12–22 · All fencing levels considered</span><span class="zh" style="font-family:var(--zh)">12至22岁 · 所有击剑水平均可申请</span></li>
+          <li><span class="li-mark">✦</span><span class="en">Limited to 15 participants per program</span><span class="zh" style="font-family:var(--zh)">每个项目限15名参与者</span></li>
+          <li><span class="li-mark">✦</span><span class="en">Full bilingual English &amp; Mandarin support</span><span class="zh" style="font-family:var(--zh)">全程英语和普通话双语支持</span></li>
+          <li><span class="li-mark">✦</span><span class="en">Applications reviewed within 48 hours</span><span class="zh" style="font-family:var(--zh)">申请将在48小时内审核</span></li>
+          <li><span class="li-mark">✦</span><span class="en">Inquiries: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="87eee9e1e8c7e4efe6eaf7eee8e9f4f7e6f3efa9e4e8ea">[email&#160;protected]</a></span><span class="zh" style="font-family:var(--zh)">咨询：<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="0b62656d644b68636a667b626465787b6a7f6325686466">[email&#160;protected]</a></span></li>
+        </ul>
+      </div>
+      <div class="reveal reveal-d2">
+        <div class="reg-form">
+          <div class="form-title"><span class="en">Submit Application</span><span class="zh" style="font-family:var(--zh)">提交申请</span></div>
+          <div class="form-sub"><span class="en">No commitment required · We'll respond within 48 hours</span><span class="zh">无需承诺 · 48小时内回复</span></div>
+          <div class="form-row">
+            <div class="form-group"><label><span class="en">Parent Name</span><span class="zh">家长姓名</span></label><input type="text" placeholder="Full name"></div>
+            <div class="form-group"><label><span class="en">Student Name</span><span class="zh">学生姓名</span></label><input type="text" placeholder="Full name"></div>
+          </div>
+          <div class="form-row">
+            <div class="form-group"><label><span class="en">Age</span><span class="zh">年龄</span></label><input type="number" placeholder="e.g. 15" min="12" max="22"></div>
+            <div class="form-group"><label><span class="en">Email Address</span><span class="zh">电子邮件</span></label><input type="email" placeholder="your@email.com"></div>
+          </div>
+          <div class="form-group"><label><span class="en">Program Interest</span><span class="zh">意向项目</span></label>
+            <select><option value="">Select a program…</option><option>🇩🇪 Germany — The German Classic</option><option>🇫🇷 France — The French Élite</option><option>🇮🇹 Italy — The Italian Masters</option><option>🇪🇸 Spain — The Spanish Passion</option><option>Multiple / Undecided</option></select>
+          </div>
+          <div class="form-group"><label><span class="en">Fencing Level</span><span class="zh">击剑水平</span></label>
+            <select><option value="">Select level…</option><option>Beginner (0–1 year)</option><option>Intermediate (2–4 years)</option><option>Advanced (5+ years)</option><option>Competitive / National level</option></select>
+          </div>
+          <div class="form-group"><label><span class="en">Questions / Additional Notes</span><span class="zh">问题或备注</span></label><textarea placeholder="Any questions or context you'd like to share…"></textarea></div>
+          <button class="form-submit" id="submitBtn"><span class="en">Submit Application</span><span class="zh">提交申请</span></button>
+          <p class="form-foot"><span class="en">Limited to 15 participants per program.<br>Applicants reviewed within 48 hours.</span><span class="zh" style="font-family:var(--zh)">每个项目限15名参与者。申请将在48小时内审核。</span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-logo">Champion's <em>Path</em></div>
+        <p class="footer-desc"><span class="en">Elite European fencing experiences founded by European Champion &amp; World #2 Arwen Borowiak. Summer 2027.</span><span class="zh" style="font-family:var(--zh);font-size:12px;line-height:1.9">由欧洲冠军、世界排名第二的Arwen Borowiak创立的精英欧洲击剑体验。2027年夏季。</span></p>
+        <p style="margin-top:16px;font-size:11px;color:var(--c20);font-family:'Jost',sans-serif;letter-spacing:.5px">Based in Germany &nbsp;·&nbsp; <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="97fef9f1f8d7f4fff6fae7fef8f9e4e7f6e3ffb9f4f8fa">[email&#160;protected]</a></p>
+      </div>
+      <div class="footer-col">
+        <h5><span class="en">Programs</span><span class="zh">项目</span></h5>
+        <ul>
+          <li><a onclick="openModal('de')"><span class="en">Germany — The German Classic</span><span class="zh">德国经典之旅</span></a></li>
+          <li><a onclick="openModal('fr')"><span class="en">France — The French Élite</span><span class="zh">法国精英之旅</span></a></li>
+          <li><a onclick="openModal('it')"><span class="en">Italy — The Italian Masters</span><span class="zh">意大利大师之旅</span></a></li>
+          <li><a onclick="openModal('es')"><span class="en">Spain — The Spanish Passion</span><span class="zh">西班牙激情之旅</span></a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5><span class="en">Navigate</span><span class="zh">导航</span></h5>
+        <ul>
+          <li><a onclick="scrollTo2('#about')"><span class="en">About Arwen</span><span class="zh">关于 Arwen</span></a></li>
+          <li><a onclick="scrollTo2('#investment')"><span class="en">Investment</span><span class="zh">申请</span></a></li>
+          <li><a onclick="scrollTo2('#register')"><span class="en">Apply</span><span class="zh">报名</span></a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2027 Champion's Path — Arwen Borowiak. All Rights Reserved.</span>
+      <span style="color:var(--c20)"><span class="en">Elite European Fencing Experiences</span><span class="zh" style="font-family:var(--zh)">精英欧洲击剑体验</span></span>
+    </div>
+  </div>
+</footer>
+
+<!-- MODAL -->
+<button class="modal-close-btn" onclick="closeModal()">← <span class="en">Back</span><span class="zh">返回</span></button>
+<div class="modal-wrap" id="modal">
+  <div class="modal-scroll"><div class="modal-inner" id="modal-content"></div></div>
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+function buildTicker(){const zh=document.body.classList.contains('zh');const el=document.getElementById('ticker');if(el)el.innerHTML=[...TICK,...TICK].map(([en,z])=>`<span class="ticker-item"><span class="ticker-dot">◆</span>${zh?z:en}</span>`).join('')}
+function setLang(l){document.body.classList.toggle('zh',l==='zh');document.querySelectorAll('.lang-wrap button').forEach((b,i)=>{b.classList.toggle('on',(i===0&&l==='en')||(i===1&&l==='zh'));});buildTicker();}
+function scrollTo2(id){document.querySelector(id)?.scrollIntoView({behavior:'smooth'})}
+window.addEventListener('scroll',()=>{document.getElementById('nav').classList.toggle('scrolled',window.scrollY>50)});
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');obs.unobserve(e.target);}})},{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+const TICK=[['2 Weeks · 4 Cities','两周行程 · 四座城市'],['Max 15 Athletes','每组限额15名运动员'],['Ages 12–22','适合12至22岁'],['English & Mandarin Support','全程中英双语支持'],['Application Required','须提交正式申请'],['4-Star Accommodation','四星级住宿全程安排'],['Elite Fencing Coaching','精英专业击剑指导'],['University Visits','欧洲名校参访交流']];
+buildTicker();
+document.getElementById('submitBtn').addEventListener('click',function(){this.textContent='✓  Application Received — We\'ll be in touch!';this.style.background='#3a7d44';this.style.color='#fff';setTimeout(()=>{this.innerHTML='<span class="en">Submit Application</span><span class="zh">提交申请</span>';this.style.background='';this.style.color='';},3500)});
+
+const CAMPS={
+de:{flag:'🇩🇪',nation_en:'Germany · Europe',nation_zh:'德国 · 欧洲',title_en:'The German <em>Classic</em>',title_zh:'德国经典之旅',img:'https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=1200&q=80',intro_en:'Germany is the cradle of European discipline, academic excellence, and martial tradition. Training at elite German fencing clubs alongside world-class coaching, visiting campuses that shaped Europe\'s intellectual history, and immersing yourself in four of Germany\'s most iconic cities — this program is built for athletes who believe that excellence on the piste begins with excellence of character.',intro_zh:'德国是欧洲纪律精神、学术卓越与武道传统的摇篮。在精英击剑俱乐部接受世界顶级指导，参访塑造欧洲思想史的顶尖学府，深度沉浸于四座最具代表性的德国城市之中——本项目专为相信「剑道卓越，源自品格卓越」的运动员而设。',dur_en:'2 Weeks · 4 Cities',dur_zh:'2周 · 4座城市',
+cities:[{img:'https://images.unsplash.com/photo-1560969184-10fe8719e047?w=500&q=80',name:'BERLIN',zh:'柏林'},{img:'https://images.unsplash.com/photo-1467269204594-9661b134dd2b?w=500&q=80',name:'MUNICH',zh:'慕尼黑'},{img:'https://images.unsplash.com/photo-1519677100203-a0e668c92439?w=500&q=80',name:'FRANKFURT',zh:'法兰克福'},{img:'https://images.unsplash.com/photo-1573979429486-f5adb7c7c40e?w=500&q=80',name:'COLOGNE',zh:'科隆'}],
+weeks:[
+{label_en:'WEEK 1 — BERLIN & MUNICH',label_zh:'第一周 — 柏林与慕尼黑',days:[
+{d:'Day 1',h_en:'Arrival in Berlin · Welcome Dinner',h_zh:'抵达柏林 · 欢迎晚宴',b_en:'Airport pickup · Hotel check-in · Welcome dinner at a historic Berlin restaurant · Group orientation',b_zh:'机场接机 · 酒店入住 · 柏林历史餐厅欢迎晚宴 · 团队介绍'},
+{d:'Day 2–3',h_en:'Elite Fencing Sessions in Berlin',h_zh:'精英击剑训练 — 柏林',b_en:'Morning and afternoon sessions at Fechter-Bund Berlin · Technique, footwork, tactical drills with Arwen · Evening video analysis',b_zh:'在柏林击剑联合会上午和下午训练 · Arwen带领技术、步法、战术训练 · 晚间视频分析'},
+{d:'Day 4',h_en:'University Visit & Cultural Tour',h_zh:'大学参观与文化之旅',b_en:'Humboldt University campus tour · Student exchange · Brandenburg Gate, Reichstag, Museum Island, East Side Gallery',b_zh:'洪堡大学校园参观 · 学生交流 · 勃兰登堡门、国会大厦、博物馆岛、东侧画廊'},
+{d:'Day 5',h_en:'Bundesliga Stadium Experience',h_zh:'德甲球场体验',b_en:'Olympic Stadium or Allianz Arena visit · Bundesliga match · Meet local athletes · Post-match analysis evening',b_zh:'参观奥林匹克体育场或安联球场 · 德甲比赛 · 认识当地运动员 · 赛后分析夜'},
+{d:'Day 6',h_en:'Transfer to Munich',h_zh:'前往慕尼黑',b_en:'High-speed rail to Munich · Marienplatz and city orientation · Evening Bavarian dinner at traditional Hofbräuhaus',b_zh:'高速铁路前往慕尼黑 · 玛利亚广场和城市定向 · 传统霍夫布劳豪斯巴伐利亚晚餐'},
+{d:'Day 7',h_en:'Munich Training & Bavarian Culture',h_zh:'慕尼黑训练与巴伐利亚文化',b_en:'Morning session at TSV München · TU Munich campus visit · Neuschwanstein Castle afternoon · Cultural exchange with German student athletes',b_zh:'在TSV慕尼黑上午训练 · 慕尼黑工大校园参观 · 新天鹅堡下午游 · 与德国学生运动员文化交流'}
+]},
+{label_en:'WEEK 2 — FRANKFURT & COLOGNE',label_zh:'第二周 — 法兰克福与科隆',days:[
+{d:'Day 8',h_en:'Frankfurt Skyline & Training',h_zh:'法兰克福天际线与训练',b_en:'Train to Frankfurt · Morning training session · Römer square and waterfront · Frankfurt skyline from Maintower observation deck',b_zh:'乘火车前往法兰克福 · 上午训练 · 罗马广场和滨水区 · 从美因大厦观景台观看天际线'},
+{d:'Day 9',h_en:'University Campus Visit',h_zh:'大学校园参观',b_en:'Goethe University Frankfurt guided tour · Meet students · Academic panel on sport and education · Afternoon sparring session',b_zh:'歌德大学法兰克福导览 · 与学生交流 · 体育和教育学术座谈 · 下午击剑对练'},
+{d:'Day 10',h_en:'Rhine Cultural Excursion',h_zh:'莱茵河文化之旅',b_en:'Rhine Valley boat cruise · UNESCO castle trail · Wine village in Rüdesheim · Evening back in Frankfurt',b_zh:'莱茵河谷游船 · 联合国教科文组织古堡之路 · 吕德斯海姆葡萄酒村 · 晚间返回法兰克福'},
+{d:'Day 11',h_en:'Transfer to Cologne',h_zh:'前往科隆',b_en:'Morning rail to Cologne · Cologne Cathedral (UNESCO) · Chocolate Museum · Rhine promenade evening walk',b_zh:'上午乘火车前往科隆 · 科隆大教堂（联合国教科文组织）· 巧克力博物馆 · 莱茵河长廊夜游'},
+{d:'Day 12–13',h_en:'Final Fencing Tournament',h_zh:'最终击剑锦标赛',b_en:'Two-day tournament at FG Köln · All participants compete · Individual skills assessment with Arwen · Coaching debrief and personal progress reports',b_zh:'在FG科隆举行两天锦标赛 · 所有参与者比赛 · Arwen个人技能评估 · 训练总结和进步报告'},
+{d:'Day 14',h_en:'Closing Gala & Departure',h_zh:'闭幕晚宴与离程',b_en:'Certificate ceremony · Group farewell gala dinner · Personal gifts and program journals · Airport transfers and departures',b_zh:'证书颁发典礼 · 团队告别晚宴 · 个人礼品和项目日志 · 机场送机和离程'}
+]}],
+tags:['🤺 ELITE CLUB TRAINING','🏛 HUMBOLDT UNIVERSITY','⚽ BUNDESLIGA','🏰 BAVARIAN CULTURE','🎓 TU MUNICH']},
+
+fr:{flag:'🇫🇷',nation_en:'France · Europe',nation_zh:'法国 · 欧洲',title_en:'The French <em>Élite</em>',title_zh:'法国精英之旅',img:'https://images.unsplash.com/photo-1431274172761-fca41d930114?w=1200&q=80',intro_en:'France carries the most storied tradition in Olympic fencing — its masters invented much of the classical vocabulary still used on every piste in the world. From Paris to the Mediterranean coast, this program blends rigorous training at elite French clubs with the elegance and cultural depth that defines French civilisation.',intro_zh:'法国拥有奥运击剑项目中最悠久的传统——法国大师们创立的古典技术体系，至今仍在世界各地的剑道上广泛沿用。从巴黎到地中海海岸，本项目将精英法国俱乐部的严格训练，与法国文明特有的优雅气质和深厚文化底蕴完美融合。',dur_en:'2 Weeks · 4 Cities',dur_zh:'2周 · 4座城市',
+cities:[{img:'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=500&q=80',name:'PARIS',zh:'巴黎'},{img:'https://images.unsplash.com/photo-1524397057410-1e775ed476f3?w=500&q=80',name:'LYON',zh:'里昂'},{img:'https://images.unsplash.com/photo-1589909202802-8f4aadce1849?w=500&q=80',name:'BORDEAUX',zh:'波尔多'},{img:'https://images.unsplash.com/photo-1533929736458-ca588d08c8be?w=500&q=80',name:'NICE',zh:'尼斯'}],
+weeks:[
+{label_en:'WEEK 1 — PARIS & LYON',label_zh:'第一周 — 巴黎与里昂',days:[
+{d:'Day 1',h_en:'Arrival in Paris · Welcome Dinner',h_zh:'抵达巴黎 · 欢迎晚宴',b_en:'CDG Airport pickup · Hotel near the Seine · Welcome dinner in Saint-Germain · Program overview and group introductions',b_zh:'戴高乐机场接机 · 塞纳河畔酒店 · 圣日耳曼区欢迎晚宴 · 项目概览和团队介绍'},
+{d:'Day 2–3',h_en:'Paris Elite Fencing Club Sessions',h_zh:'巴黎精英击剑俱乐部训练',b_en:'Training at Paris Île-de-France Fencing League · Olympic-style drills with French masters · Evening walk through Marais and Bastille districts',b_zh:'在巴黎法兰西岛击剑联盟训练 · 在法国大师带领下奥林匹克风格训练 · 晚间游览玛莱区和巴士底区'},
+{d:'Day 4',h_en:'University Visit & Louvre Experience',h_zh:'大学参观与卢浮宫体验',b_en:'Sciences Po and Sorbonne campus tours · Student exchange · Louvre Museum guided highlights (Mona Lisa, Venus de Milo) · Tuileries Garden evening',b_zh:'巴黎政治学院和索邦大学校园参观 · 学生交流 · 卢浮宫精华导览 · 杜乐丽花园夜晚'},
+{d:'Day 5',h_en:'Ligue 1 Stadium Tour',h_zh:'法甲球场参观',b_en:'Parc des Princes or Stade de France tour · Meet PSG academy athletes · Eiffel Tower at sunset · Champs-Élysées evening',b_zh:'王子公园或法兰西大球场参观 · 与巴黎圣日耳曼学院运动员会面 · 日落埃菲尔铁塔 · 香榭丽舍大道夜晚'},
+{d:'Day 6',h_en:'Train to Lyon',h_zh:'前往里昂',b_en:'TGV to Lyon · Vieux-Lyon (UNESCO Old Town) walking tour · Traboules — the secret passageways of Lyon',b_zh:'TGV前往里昂 · 老里昂（联合国教科文组织古城）步行游览 · 里昂秘密通道'},
+{d:'Day 7',h_en:'Lyon Training & Old Town Tour',h_zh:'里昂训练与古城游览',b_en:'Training at Lyon Fencing Club · Gastronomic lunch at a Bouchon Lyonnais · Fourvière Basilica and Roman amphitheatre · Cultural exchange with French students',b_zh:'里昂击剑俱乐部训练 · 布雄里昂小馆美食午餐 · 富维耶圣母大殿和罗马剧场 · 与法国学生文化交流'}
+]},
+{label_en:'WEEK 2 — BORDEAUX & NICE',label_zh:'第二周 — 波尔多与尼斯',days:[
+{d:'Day 8',h_en:'Transfer to Bordeaux · Training',h_zh:'前往波尔多 · 训练',b_en:'Train to Bordeaux · Afternoon training · Place de la Bourse and Miroir d\'Eau · Wine heritage district evening',b_zh:'乘火车前往波尔多 · 下午训练 · 交易所广场和水镜广场 · 葡萄酒遗产区夜游'},
+{d:'Day 9',h_en:'University Visit & Cultural Exchange',h_zh:'大学参观与文化交流',b_en:'University of Bordeaux campus tour · Cité du Vin heritage museum · Saint-Émilion UNESCO village · Local student dinner',b_zh:'波尔多大学校园参观 · 葡萄酒城市博物馆 · 圣爱美隆联合国教科文组织村庄 · 当地学生晚餐'},
+{d:'Day 10',h_en:'Travel to Nice',h_zh:'前往尼斯',b_en:'Train along the French Riviera coast · Promenade des Anglais walk · Old Nice market · Mediterranean welcome dinner',b_zh:'沿蔚蓝海岸乘火车 · 英国人长廊散步 · 尼斯老城市场 · 地中海欢迎晚宴'},
+{d:'Day 11–12',h_en:'Riviera Fencing Sessions',h_zh:'蔚蓝海岸击剑训练',b_en:'Intensive training at Nice Fencing Club · Arwen-led tactical scenarios · Monaco half-day excursion · Èze hilltop village',b_zh:'尼斯击剑俱乐部密集训练 · Arwen带领战术情景 · 摩纳哥半日游 · 埃兹山顶村庄'},
+{d:'Day 13',h_en:'Mediterranean Cultural Experience',h_zh:'地中海文化体验',b_en:'Coastal boat excursion · Matisse Museum · Group farewell beach afternoon · Gala dinner at seafront restaurant',b_zh:'海岸游船 · 马蒂斯博物馆 · 团队告别海滩下午 · 海滨餐厅告别晚宴'},
+{d:'Day 14',h_en:'Closing Ceremony & Departure',h_zh:'闭幕典礼与离程',b_en:'Certificate and medal ceremony · Personal coaching reports distributed · Group farewell · Airport transfers from Nice',b_zh:'证书和奖牌颁发典礼 · 个人训练报告分发 · 团队告别 · 尼斯机场送机'}
+]}],
+tags:['🤺 ELITE FENCING','🗼 PARIS CULTURE','🎨 LOUVRE','⚽ LIGUE 1','🌊 FRENCH RIVIERA']},
+
+it:{flag:'🇮🇹',nation_en:'Italy · Europe',nation_zh:'意大利 · 欧洲',title_en:'The Italian <em>Masters</em>',title_zh:'意大利大师之旅',img:'https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=1200&q=80',intro_en:'No nation has produced more Olympic fencing champions than Italy. The Italian masters are legendary — their technique, artistry, and passion have shaped the sport for centuries. This program takes you inside that tradition: training with Italian maestros in Rome, walking the corridors where Renaissance genius flourished in Florence, arriving in Venice for a finale unlike anything else on earth.',intro_zh:'没有任何国家能比意大利培养出更多的奥运击剑冠军。意大利大师们是这项运动的传奇——他们的精湛技术、艺术造诣与满腔热忱，数百年来深刻塑造了击剑的灵魂。本项目带您走入这一传统：在罗马跟随意大利大师训练，在佛罗伦萨文艺复兴大师留下足迹的长廊漫步，最终在威尼斯迎来举世无双的华丽终章。',dur_en:'2 Weeks · 4 Cities',dur_zh:'2周 · 4座城市',
+cities:[{img:'https://images.unsplash.com/photo-1515542622106-078bda504773?w=500&q=80',name:'ROME',zh:'罗马'},{img:'https://images.unsplash.com/photo-1541370976299-4d24ebbc9077?w=500&q=80',name:'FLORENCE',zh:'佛罗伦萨'},{img:'https://images.unsplash.com/photo-1610016302534-6f67f1c968d8?w=500&q=80',name:'MILAN',zh:'米兰'},{img:'https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?w=500&q=80',name:'VENICE',zh:'威尼斯'}],
+weeks:[
+{label_en:'WEEK 1 — ROME & FLORENCE',label_zh:'第一周 — 罗马与佛罗伦萨',days:[
+{d:'Day 1',h_en:'Arrival in Rome · Welcome Dinner',h_zh:'抵达罗马 · 欢迎晚宴',b_en:'FCO Airport pickup · Hotel near Campo de\' Fiori · Welcome dinner at a classic Roman trattoria · Program overview',b_zh:'菲乌米奇诺机场接机 · 百花广场附近酒店 · 传统罗马小馆欢迎晚宴 · 项目概览'},
+{d:'Day 2–3',h_en:'Rome Fencing Club Intensive',h_zh:'罗马击剑俱乐部强化训练',b_en:'Training at Circolo della Scherma Roma · Work with legendary Italian maestros · Classical Italian technique sessions · Evening Trastevere walk',b_zh:'在罗马击剑俱乐部训练 · 与传奇意大利大师合作 · 古典意大利技术训练 · 特拉斯提弗列区夜游'},
+{d:'Day 4',h_en:'Colosseum & University Visit',h_zh:'斗兽场与大学参观',b_en:'Guided tour of the Colosseum and Roman Forum · La Sapienza University campus visit · Vatican Museums and Sistine Chapel afternoon',b_zh:'斗兽场和古罗马广场导览 · 萨皮恩扎大学校园参观 · 梵蒂冈博物馆和西斯廷教堂下午游'},
+{d:'Day 5',h_en:'Train to Florence',h_zh:'前往佛罗伦萨',b_en:'High-speed train to Florence · Ponte Vecchio and Arno riverside · Leather market and artisan quarter exploration',b_zh:'高铁前往佛罗伦萨 · 老桥和阿诺河畔 · 皮革市场和工匠区探索'},
+{d:'Day 6–7',h_en:'Florence Training & Renaissance Tour',h_zh:'佛罗伦萨训练与文艺复兴游览',b_en:'Training at Circolo Scherma Firenze · Uffizi Gallery (Botticelli, Leonardo, Raphael) · Accademia Gallery — Michelangelo\'s David · Piazzale Michelangelo at sunset · Chianti vineyard afternoon',b_zh:'在佛罗伦萨击剑俱乐部训练 · 乌菲兹美术馆（波提切利、达芬奇、拉斐尔）· 学院美术馆——大卫像 · 米开朗基罗广场日落 · 基安蒂葡萄园'}
+]},
+{label_en:'WEEK 2 — MILAN & VENICE',label_zh:'第二周 — 米兰与威尼斯',days:[
+{d:'Day 8',h_en:'Transfer to Milan · Elite Training',h_zh:'前往米兰 · 精英训练',b_en:'Train to Milan · Afternoon training at Club Scherma Milano · Milan Duomo and Galleria Vittorio Emanuele II · Fashion district evening',b_zh:'乘火车前往米兰 · 下午在米兰击剑俱乐部训练 · 米兰大教堂和埃马努埃莱二世长廊 · 时尚区夜晚'},
+{d:'Day 9',h_en:'University Visit & La Scala District',h_zh:'大学参观与斯卡拉区',b_en:'Bocconi University campus tour · Student exchange · La Scala opera house guided visit · Leonardo da Vinci\'s The Last Supper',b_zh:'博科尼大学校园参观 · 学生交流 · 斯卡拉剧院导览 · 达芬奇最后的晚餐'},
+{d:'Day 10',h_en:'Travel to Venice',h_zh:'前往威尼斯',b_en:'Train to Venice Santa Lucia · Water taxi to hotel on the Grand Canal · Gondola tour at dusk · Rialto Bridge and St Mark\'s Square evening',b_zh:'乘火车前往威尼斯圣卢西亚站 · 乘水上出租车前往大运河酒店 · 黄昏贡多拉游 · 里亚托桥和圣马可广场夜晚'},
+{d:'Day 11–12',h_en:'Venice Cultural Immersion & Training',h_zh:'威尼斯文化沉浸与训练',b_en:'Training at Venice fencing facility · Doge\'s Palace and Bridge of Sighs · Murano glass-blowing workshop · Venetian mask-making class · Ca\' Foscari University visit',b_zh:'威尼斯击剑设施训练 · 总督宫和叹息桥 · 穆拉诺玻璃吹制工坊 · 威尼斯面具制作课 · 福斯卡里大学参观'},
+{d:'Day 13',h_en:'Final Tournament & Awards',h_zh:'最终锦标赛与颁奖典礼',b_en:'Competitive tournament in Venice · Individual skill assessments by Arwen · Gold medal and certificate ceremony at sunset',b_zh:'威尼斯竞技锦标赛 · Arwen个人技能评估 · 日落时分金牌和证书颁发典礼'},
+{d:'Day 14',h_en:'Departure',h_zh:'离程',b_en:'Final group breakfast on the canal · Personal coaching journals and gifts · Water taxi to Venice Marco Polo Airport · Farewell and departures',b_zh:'运河边最后的团队早餐 · 个人训练日志和礼品 · 乘水上出租车前往马可波罗机场 · 告别和离程'}
+]}],
+tags:['🤺 ITALIAN MASTERS','🏛 COLOSSEUM','🎨 UFFIZI GALLERY','🎭 LA SCALA','🚣 VENICE CANALS']},
+
+es:{flag:'🇪🇸',nation_en:'Spain · Europe',nation_zh:'西班牙 · 欧洲',title_en:'The Spanish <em>Passion</em>',title_zh:'西班牙激情之旅',img:'https://images.unsplash.com/photo-1539037116277-4db20889f2d4?w=1200&q=80',intro_en:'Spain pulses with an energy found nowhere else in Europe — in its football, its art, its architecture, and the fierce pride of its people. From the intellectual grandeur of Madrid to Gaudí\'s surreal Barcelona, from the Moorish splendour of Seville to Valencia\'s blazing coastal light, this program captures the full force of Iberian culture while delivering elite fencing training at Spain\'s finest clubs.',intro_zh:'西班牙涌动着欧洲其他地方所没有的独特活力——在足球、艺术、建筑与这个民族骨子里的那股烈火般的自豪感之中。从马德里的宏大文化气象到高迪超现实主义的巴塞罗那，从塞维利亚的摩尔宫殿辉煌到瓦伦西亚炙热的地中海海岸光芒，本项目在西班牙顶尖俱乐部提供精英击剑训练的同时，将伊比利亚文化的全部激情倾注其中。',dur_en:'2 Weeks · 4 Cities',dur_zh:'2周 · 4座城市',
+cities:[{img:'https://images.unsplash.com/photo-1543783207-ec64e4d95325?w=500&q=80',name:'MADRID',zh:'马德里'},{img:'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=500&q=80',name:'BARCELONA',zh:'巴塞罗那'},{img:'https://images.unsplash.com/photo-1588668214407-6ea9a6d8c272?w=500&q=80',name:'VALENCIA',zh:'瓦伦西亚'},{img:'https://images.unsplash.com/photo-1559070169-a3077159ee16?w=500&q=80',name:'SEVILLE',zh:'塞维利亚'}],
+weeks:[
+{label_en:'WEEK 1 — MADRID & BARCELONA',label_zh:'第一周 — 马德里与巴塞罗那',days:[
+{d:'Day 1',h_en:'Arrival in Madrid · Welcome Dinner',h_zh:'抵达马德里 · 欢迎晚宴',b_en:'Barajas Airport pickup · Hotel in central Madrid · Welcome tapas dinner in La Latina · Plaza Mayor evening and group orientation',b_zh:'巴拉哈斯机场接机 · 马德里市中心酒店 · 拉拉蒂纳区欢迎塔帕斯晚餐 · 主广场夜游和团队介绍'},
+{d:'Day 2–3',h_en:'Madrid Fencing Club Intensive',h_zh:'马德里击剑俱乐部强化训练',b_en:'Training at Real Club de Esgrima de Madrid · Arwen-led morning and afternoon sessions · Technical focus: Spanish bladework philosophy · Evening Retiro Park walk',b_zh:'在马德里皇家击剑俱乐部训练 · Arwen带领上午和下午训练 · 技术重点：西班牙剑法哲学 · 丽池公园夜游'},
+{d:'Day 4',h_en:'University Visit & Prado Museum',h_zh:'大学参观与普拉多博物馆',b_en:'Complutense University Madrid campus tour · Prado Museum guided visit (Velázquez, Goya) · Royal Palace of Madrid · Bernabéu stadium neighbourhood',b_zh:'马德里康普顿斯大学校园参观 · 普拉多博物馆导览（委拉斯开兹、戈雅）· 马德里王宫 · 伯纳乌球场周边'},
+{d:'Day 5',h_en:'Travel to Barcelona',h_zh:'前往巴塞罗那',b_en:'AVE high-speed train to Barcelona · Hotel in Eixample district · Gothic Quarter first exploration · Barceloneta seafront evening',b_zh:'AVE高铁前往巴塞罗那 · 扩建区酒店 · 哥特区初探 · 巴塞罗内塔海滨夜晚'},
+{d:'Day 6–7',h_en:'Barcelona Training & Gaudí Tour',h_zh:'巴塞罗那训练与高迪之旅',b_en:'Training at Club d\'Esgrima de Barcelona · Sagrada Família guided tour · Park Güell · Universitat de Barcelona · Camp Nou stadium tour · La Rambla and Boqueria market',b_zh:'在巴塞罗那击剑俱乐部训练 · 圣家堂导览 · 桂尔公园 · 巴塞罗那大学 · 诺坎普球场参观 · 拉斯兰布拉斯和博克利亚市场'}
+]},
+{label_en:'WEEK 2 — VALENCIA & SEVILLE',label_zh:'第二周 — 瓦伦西亚与塞维利亚',days:[
+{d:'Day 8',h_en:'Valencia Coastal Training',h_zh:'瓦伦西亚海岸训练',b_en:'Train to Valencia · Training at Club Esgrima Valencia · City of Arts and Sciences · Malvarosa beach evening · Traditional paella dinner',b_zh:'乘火车前往瓦伦西亚 · 在瓦伦西亚击剑俱乐部训练 · 艺术科学城 · 马尔瓦罗萨海滩夜游 · 传统海鲜饭晚餐'},
+{d:'Day 9',h_en:'Cultural Exchange & Historic Center',h_zh:'文化交流与历史中心',b_en:'Universitat de València campus · Student exchange · Valencia Cathedral and the Holy Grail · Silk Exchange UNESCO · Afternoon training session',b_zh:'瓦伦西亚大学校园 · 学生交流 · 瓦伦西亚大教堂和圣杯 · 丝绸交易所（联合国教科文组织）· 下午训练'},
+{d:'Day 10',h_en:'Transfer to Seville',h_zh:'前往塞维利亚',b_en:'AVE train to Seville · Hotel in the historic centre · Seville Cathedral exterior · Triana neighbourhood exploration',b_zh:'AVE高铁前往塞维利亚 · 历史中心酒店 · 塞维利亚大教堂外观 · 特里亚纳社区探索'},
+{d:'Day 11–12',h_en:'Andalusian Training & Flamenco Evening',h_zh:'安达卢西亚训练与弗拉门戈之夜',b_en:'Training at Club Esgrima Sevilla · Real Alcázar palace and gardens · Plaza de España · Universidad de Sevilla · Traditional flamenco show in Triana · Tapas in Barrio Santa Cruz',b_zh:'在塞维利亚击剑俱乐部训练 · 真实城堡和花园 · 西班牙广场 · 塞维利亚大学 · 特里亚纳弗拉门戈表演 · 圣克鲁斯街区塔帕斯'},
+{d:'Day 13',h_en:'Closing Tournament & Awards',h_zh:'闭幕锦标赛与颁奖典礼',b_en:'Final competitive tournament · All participants compete · Individual assessments by Arwen · Gold medal and certificate ceremony at Seville\'s historic venue',b_zh:'最终竞技锦标赛 · 所有参与者比赛 · Arwen个人评估 · 在塞维利亚历史场馆颁发金牌和证书'},
+{d:'Day 14',h_en:'Departure',h_zh:'离程',b_en:'Final group breakfast · Personal coaching journals and gifts · Transfers to Seville or Málaga Airport · Farewells and departures',b_zh:'最终团队早餐 · 个人训练日志和礼品 · 送往塞维利亚或马拉加机场 · 告别和离程'}
+]}],
+tags:['🤺 ELITE TRAINING','🏛 PRADO MUSEUM','⛪ SAGRADA FAMÍLIA','⚽ LA LIGA','💃 FLAMENCO']}
+};
+
+function openModal(id){
+  const c=CAMPS[id];
+  const zh=document.body.classList.contains('zh');
+  const t=(en,z)=>zh?z:en;
+  const citiesHTML=c.cities.map(city=>`
+    <div class="m-city">
+      <img src="${city.img}" alt="${city.name}" loading="lazy">
+      <div class="m-city-over"></div>
+      <div class="m-city-info">
+        <div class="m-city-name">${city.name}</div>
+        <div class="m-city-zh">${city.zh}</div>
+      </div>
+    </div>`).join('');
+  const weekHTML=c.weeks.map(wk=>`
+    <div class="m-itin-week">
+      <span class="m-week-label">${t(wk.label_en,wk.label_zh)}</span>
+      ${wk.days.map(day=>`
+        <div class="m-itin-row">
+          <div class="m-day">${day.d}</div>
+          <div>
+            <div class="m-itin-head">${t(day.h_en,day.h_zh)}</div>
+            <div class="m-itin-body">${t(day.b_en,day.b_zh)}</div>
+          </div>
+        </div>`).join('')}
+    </div>`).join('');
+  const tagsHTML=c.tags.map(tag=>`<span class="m-tag">${tag}</span>`).join('');
+  const zhStyle=zh?'font-family:var(--zh);font-size:15px;line-height:2':'';
+  const zhStyleSm=zh?'font-family:var(--zh)':'';
+  document.getElementById('modal-content').innerHTML=
+    `<div class="m-hero"><img src="${c.img}" alt="${c.flag}" loading="lazy">
+      <div class="m-hero-over">
+        <div class="m-flag">${c.flag}</div>
+        <div class="m-nation">${t(c.nation_en,c.nation_zh)}</div>
+        <h2 class="m-title">${t(c.title_en,c.title_zh)}</h2>
+      </div>
+    </div>
+    <div class="m-intro">
+      <p class="m-intro-text" style="${zhStyle}">${t(c.intro_en,c.intro_zh)}</p>
+      <div class="m-details">
+        <div class="m-det-item"><div class="m-det-icon">📅</div><div class="m-det-label">${t('Duration','行程时长')}</div><div class="m-det-val">${t(c.dur_en,c.dur_zh)}</div></div>
+        <div class="m-det-item"><div class="m-det-icon">👥</div><div class="m-det-label">${t('Group Size','团队规模')}</div><div class="m-det-val">${t('Maximum 15 athletes','最多15名运动员')}</div></div>
+        <div class="m-det-item"><div class="m-det-icon">🌐</div><div class="m-det-label">${t('Language','语言支持')}</div><div class="m-det-val">${t('English & Mandarin','中英双语全程支持')}</div></div>
+        <div class="m-det-item"><div class="m-det-icon">📦</div><div class="m-det-label">${t('Included','费用包含')}</div><div class="m-det-val">${t('4-star hotels, breakfast, all transport, training & cultural activities','四星级酒店、早餐、全程交通、训练及文化活动')}</div></div>
+      </div>
+    </div>
+    <span class="m-sec-label">— ${t('Cities','到访城市')}</span>
+    <div class="m-cities">${citiesHTML}</div>
+    <div class="m-tags">${tagsHTML}</div>
+    <span class="m-sec-label">— ${t('Full 2-Week Itinerary','两周完整行程')}</span>
+    ${weekHTML}
+    <div class="m-cta">
+      <p style="${zhStyleSm}">${t('Ready to apply for this program? Spaces are limited to 15 athletes.','准备好申请这个项目了吗？名额仅限15位。')}</p>
+      <a href="#register" class="btn-gold" onclick="closeModal()">${t('Request Invitation →','申请邀请函 →')}</a>
+    </div>`;
+  const modal=document.getElementById('modal');
+  modal.classList.add('open');
+  modal.querySelector('.modal-scroll').scrollTop=0;
+  document.body.style.overflow='hidden';
+  document.body.classList.add('modal-open');
+}
+
+function closeModal(){
+  document.getElementById('modal').classList.remove('open');
+  document.body.style.overflow='';
+  document.body.classList.remove('modal-open');
+}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
+</script>
+</body>
+</html>
